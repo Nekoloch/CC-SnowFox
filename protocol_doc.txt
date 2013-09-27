@@ -21,6 +21,7 @@ SnowFox Web Based Client Headers and Server Headers:
 	NR U ["hostname"] = The name of the computer, if there is no name ["hostname"] will automatically set to the ID of the computer.
 	
 	NR C ["cookies"] = "ssid=12345;this=that" Is the basic format of cookies. You can whitelist cookie usage to protect your cookies!
+	R C ["protocol"] = "snow://" The protocol in which is to be used
 	R C ["host"] = "test.com" The actual website the client wants to reach
 	R C ["sub"] = "www" The sub-domain specified
 	R C ["GET"] = "/index.html" Tell a web-server what you want from it. Handy to utilize instead of special splits and stuff that Firewolf uses!
@@ -28,7 +29,7 @@ SnowFox Web Based Client Headers and Server Headers:
 	
 	R S ["code"] = "200 OK" Response codes tell the browser how to interpret failures!
 	R S ["content"] = "print(\"Hello World\")" Content tells the browser what to display.
-	NR S ["redirect"] = "snow://stuff.com/" or "http://stuff.com/code.lua" Tells the browser where to get the content from
+	NR S ["redirect"] = {"snow://","stuff.com/"} or {"http://","stuff.com/code.lua"} Tells the browser where to get the content from
 	
 	These headers are assuming that the client version is 1.0.0 or higher. Just to be said that in the early versions (such as 0.1 - 0.8) some headers
 	will not be supported by the official browser.
