@@ -1,0 +1,36 @@
+SnowNet Protocol Documentation
+
+Differences between the Standardized Rednet Protocol ( rdnt:// ) and SnowNet ( snow:// ):
+	- SnowNet runs entirely off of tables, allowing more in-depth messages to be sent with easier management.
+	- SnowNet doesn't use the highly deprecated "Rednet.api" functionality that Rednet Explorer and Firewolf uses.
+
+SnowNet was designed specifically for SnowFox but is highly flexible, due to its use of table serialization it can also be used not only for web
+browsing software but also FTP, SMTP, and other types of protocols.
+
+Why should SnowNet be used for Web Browsers more than the rdnt protocol?
+Simply put, headers can be used to describe user-agents, cookies can be supported, and private server header handlers can be developed to provide
+a more secure interface for your site. Also, with this kind of system, servers can now have a better domain name system than the old rdnt:// protocol
+had. Servers utilizing SnowNet will be able to utilize Headers to describe the Host Name, the Domain Name, and the OS it's running on with ease.
+
+SnowFox Web Based Client Headers and Server Headers:
+	U = Universal, S = Server, C = Client
+	R = Required, NR = Not Required
+	
+	NR U ["user-agent"] = The Operating System a client is running on, basically a relay of os.version().
+	R U ["protocol-version"] = The version of the protocol
+	NR U ["hostname"] = The name of the computer, if there is no name ["hostname"] will automatically set to the ID of the computer.
+	
+	NR C ["cookies"] = "ssid=12345;this=that" Is the basic format of cookies. You can whitelist cookie usage to protect your cookies!
+	R C ["host"] = "test.com" The actual website the client wants to reach
+	R C ["sub"] = "www" The sub-domain specified
+	R C ["GET"] = "/index.html" Tell a web-server what you want from it. Handy to utilize instead of special splits and stuff that Firewolf uses!
+	NR C ["POST"] = "var1=1&var2=2" Basically POST data.
+	
+	R S ["code"] = "200 OK" Response codes tell the browser how to interpret failures!
+	R S ["content"] = "print(\"Hello World\")" Content tells the browser what to display.
+	NR S ["redirect"] = "snow://stuff.com/" or "http://stuff.com/code.lua" Tells the browser where to get the content from
+	
+	These headers are assuming that the client version is 1.0.0 or higher. Just to be said that in the early versions (such as 0.1 - 0.8) some headers
+	will not be supported by the official browser.
+	
+SnowFox may or may not have support for HTTPNet (as HTTPNet is third-party software if it is included it will not be in early versions)
